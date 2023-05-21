@@ -1,8 +1,9 @@
-FROM tomcat
+FROM ubuntu
 
-ADD miweb.war /usr/local/tomcat/webapps/
+COPY script.sh /
 
-EXPOSE 8080
+RUN apt -qq update && apt -qq -y install curl
+RUN chmod +x /script.sh
 
-CMD ["catalina.sh", "run"]
+ENTRYPOINT ["/script.sh"]
 
